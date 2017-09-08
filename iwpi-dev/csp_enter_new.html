@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Check In Data </title>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+</script>
+<script src="Frame/html5shiv.js"></script>
+<![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="Frame/font-awesome/css/font-awesome.min.css" />
+<link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+<!--link rel="stylesheet" type="text/css" href="Frame/corev15.css" /-->
+<!--link rel="stylesheet" type="text/css" href="Frame/tabs.css" /-->
+<link rel="stylesheet" type="text/css" href="Frame/csp_style.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<!--script src="Frame/sorttable.js"></script-->
+
+<link rel="stylesheet" type="text/css" href="Frame/jquery-ui-1.10.2.custom.min.css" />
+<script src="Frame/jquery.stickytabs.js"></script>
+<script src="Frame/misc_jquery.js"></script>
+
+<script>
+    $(function() {
+        $('.nav-tabs-sticky').stickyTabs();
+    });
+</script>
+<script>
+// Disable function
+jQuery.fn.extend({
+    disable: function(state) {
+        return this.each(function() {
+            this.disabled = state;
+        });
+    }
+});
+</script>
+
+<meta name="title" content="" />
+<meta name="description" content="" />
+<meta name="robots" content="noindex, nofollow" />
+
+<script type="text/javascript" src="Frame/jquery-ui.js"></script>
+<script type="text/javascript" src="Frame/jquery.printElement.js"></script>
+<script type="text/javascript" src="Frame/jquery.highlight.js"></script>
+<script type="text/javascript" src="Frame/jquery.fileDownload.js"></script>
+<script type="text/javascript" src="Frame/tiny_mce.js"></script>
+<script type="text/javascript" src="Frame/jquery.tinymce.js"></script>
+<script type="text/javascript" src="Frame/header_scripts.js"></script>
+
+
+<script>
+var counter = 1;
+var limit = 3;
+function addInput(divName){
+     if (counter == limit)  {
+          alert("You have reached the limit of adding " + counter + " inputs");
+          document.getElementById('addbutton').hideElement();
+     }
+     else {
+          console.log(counter + 1);
+          //var newdiv = document.createElement('div');
+          //newdiv.innerHTML = "<h3>Foreign Application ID  " + (counter + 1) + "</h3>" + " <br><input type='text' name='myInputs[]'><br><br>";
+          //var newdiv = "<div class='form-group col-xs-4 col-md-4 clear-left'><label for='foAppID"+(counter+1)+"'>Foreign Application ID "+(counter+1)+"</label><input type='text' name='myInputs[]' class='form-control' id='foAppID"+(counter+1)+"'></div><div class='form-group col-xs-4 col-md-4'><label for='foAppIDre"+(counter+1)+"'>Re-Enter Foreign Application ID "+(counter+1)+"</label><input type='text' class='form-control' id='foAppIDre"+(counter+1)+"'></div>";
+          //document.getElementById(divName).appendChild(newdiv);
+          //$("#" + divName).before(newdiv);
+          //$("#" + divName).remove();
+          
+          // instead of trying to insert crap, just unhide!
+          $("#foAppID" + (counter+1)).parent("div").removeClass("hidden");
+          $("#foAppIDre" + (counter+1)).parent("div").removeClass("hidden");
+          
+          
+          counter++;
+          if (counter == limit) {
+            $('#addbutton').disable(true);
+            //document.getElementById('addbutton').style.display = 'none';
+            //document.getElementById('buttonbreak').style.display = 'none';
+            //document.getElementById('buttonbreak2').style.display = 'none';
+          }
+     }
+}
+</script>   
+<!--script>
+$(function(){
+    $( document ).ready(function() {
+        var country = getQueryVariable('country');
+       
+        document.getElementById(country).selected = true;
+            
+    });
+})
+</script--> 
+
+ <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+
+ <script type="text/javascript" language="javascript">
+ $(function() {
+ $( "#prFileDt" ).datepicker();
+ $( "#usPetDt" ).datepicker();
+ $( "#foFileDt1" ).datepicker();
+ });
+ </script>
+
+
+
+<!--script>
+    function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script-->
+
+<body>    
+<header>
+    <img border="0" alt="CSP Logo" src="images/csp-logo.png" width="70" height="70">
+    <h1>CSP 2.0 Reporting Tool</h1>
+</header>
+
+<div class="bs-example">
+    <div class="alert alert-success fade in" id="submit-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Success!</strong> Your submission was successful.
+    </div>
+</div>
+
+<nav>
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i>Home
+      </h4>
+    </div>
+    </a>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+        <a class="side_link" href="home.pl#tab1" target="_top"><div class="static">General Info</div></a>
+        <a class="side_link" href="home.pl#tab2" target="_top"><div class="static">Reporting</div></a>
+        <a class="side_link" href="home.pl#tab3" target="_top"><div class="static">Eval Forms</div></a>
+        <a class="side_link" href="home.pl#tab4" target="_top"><div class="static">Email List</div></a>
+      </div>
+    </div>
+  </div>
+<div class="panel panel-default">
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-tachometer fa-lg fa-fw" aria-hidden="true"></i>OIPC
+    </h4>
+  </div>
+  </a>
+  <div id="collapse2" class="panel-collapse collapse">
+    <div class="panel-body">
+    <a class="side_link"  href="csp_oipc.pl#tab1" target="_top"><div class="static">Dashboard</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab2" target="_top"><div class="static">Undecided Petitions</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab3" target="_top"><div class="static">Holding/Staging</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab4" target="_top"><div class="static">To Be Docketed</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab5" target="_top"><div class="static">Awaiting US Search</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab6" target="_top"><div class="static">New PIC</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab7" target="_top"><div class="static">Process PIC</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab8" target="_top"><div class="static">Awaiting Foreign Search</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab9" target="_top"><div class="static">Subsequent Review</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab10" target="_top"><div class="static">Subsequent Action</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab11" target="_top"><div class="static">Subsequent Process</div></a>
+    <a class="side_link"  href="csp_oipc.pl#tab12" target="_top"><div class="static">Finished</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<a  data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-file fa-lg fa-fw" aria-hidden="true"></i>New
+    </h4>
+  </div>
+</a>
+  <div id="collapse4" class="panel-collapse collapse in">
+    <div class="panel-body">
+    <a class="side_link"  href="csp_enter_new.html#tab1" target="_top"><div class="static">Incoming</div></a>
+    <a class="side_link"  href="csp_enter_new.html#tab2" target="_top"><div class="static">Outgoing</div></a>
+    <a class="side_link"  href="csp_enter_new.html#tab3" target="_top"><div class="static">Manual Entry</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<a data-parent="#accordion" href="file_output.pl">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-external-link fa-lg fa-fw" aria-hidden="true"></i>Output
+    </h4>
+  </div>
+  </a>
+</div>
+
+<div class="panel panel-default">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-info-circle fa-lg fa-fw" aria-hidden="true"></i>App Info
+    </h4>
+  </div>
+  </a>
+  <div id="collapse5" class="panel-collapse collapse">
+    <div class="panel-body">
+
+    <a class="side_link" href="csp_overall.pl#tab1" target="_top"><div class="static">General Info</div></a>
+    <a class="side_link" href="csp_overall.pl#tab2" target="_top"><div class="static">Work Flow</div></a>
+    <a class="side_link" href="csp_overall.pl#tab3" target="_top"><div class="static">Documents</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-gavel fa-lg fa-fw" aria-hidden="true"></i>IPLA
+    </h4>
+  </div>
+  </a>
+  <div id="collapse6" class="panel-collapse collapse">
+    <div class="panel-body">
+
+    <a class="side_link" href="csp_ipla.pl?tab=0" target="_top"><div class="static">IPLA Action</div></a>
+    <a class="side_link" href="csp_ipla.pl?tab=1" target="_top"><div class="static">Awaiting Palm Entry</div></a>
+    <a class="side_link" href="csp_ipla.pl?tab=2" target="_top"><div class="static">Granted</div></a>
+    <a class="side_link" href="csp_ipla.pl?tab=3" target="_top"><div class="static">Denied\</div></a>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+<a class="side-button" data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-users fa-lg fa-fw" aria-hidden="true"></i>TC
+    </h4>
+  </div>
+  </a>
+  <div id="collapse7" class="panel-collapse collapse">
+    <div class="panel-body">
+
+    <a class="side_link" href="csp_tc.pl?tab=0" target="_top"><div class="static">Training</div></a>
+    <a class="side_link" href="csp_tc.pl?tab=1" target="_top"><div class="static">Docket</div></a>
+    <a class="side_link" href="csp_tc.pl?tab=2" target="_top"><div class="static">First Search</div></a>
+    <a class="side_link" href="csp_tc.pl?tab=3" target="_top"><div class="static">Foreign Search Pending</div></a>
+    <a class="side_link" href="csp_tc.pl?tab=4" target="_top"><div class="static">Subsequent Search</div></a>
+    <a class="side_link" href="csp_tc.pl?tab=5" target="_top"><div class="static">Finished</div></a>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+    <a href="admin.pl" target="_top">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <i class="fa fa-wrench fa-lg fa-fw" aria-hidden="true"></i>Admin
+    </h4>
+  </div>
+  </a>
+</div>
+</div>
+</nav>
+
+<!--body-->
+<section>
+    <section class="wrapper">
+        <div role="tabpanel" class="panel with-nav-tabs">
+        <div class="panel-heading">
+        <ul class="nav nav-tabs nav-tabs-sticky" role="tablist">
+            <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Incoming</a></li>
+            <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Outgoing</a></li>
+            <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Manual Entry</a></li>
+        </ul>
+        </div>
+        
+        <section class="block">
+            <div class="tab-content">
+            <div role="tabpanel" id="tab1" class="tab-pane fade in active">
+            <form action="upload.cgi" method="post" enctype="multipart/form-data">
+            <input type="radio" name="in_out" value="in" checked style="display:none"> 
+            <p>Select <strong>incoming</strong> document(s) to check in:<br><br>
+                <input type="file" name="document" multiple="multiple"></p>
+            <p><input type="submit" name="Submit" value="Upload" /></p>
+            </form>
+            </div>
+            
+            <div role="tabpanel" id="tab2" class="tab-pane fade in">
+            <form action="upload.cgi" method="post" enctype="multipart/form-data">
+            <input type="radio" name="in_out" value="out" checked style="display:none">
+            <p>Select <strong>outgoing</strong> document(s) to check in:<br><br>
+            <input type="file" name="document" multiple="multiple"></p>
+            <p><input type="submit" name="Submit" value="Upload" /></p>
+            </form>
+            The following applications have signed pdf search reports ready to be sent:
+            <table style="width:20%" class="sortable">
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Search Date</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+            
+            <div role="tabpanel" id="tab3" class="tab-pane fade in">
+                <div class="box box4 shadow4">
+                <p><h2>Petition Data</h2></p>
+                <div id="contentBox">
+                <form id="manual-entry-form"> <!--class="form-inline"-->
+                <!--div class="col1"-->
+                    <div class="form-group hidden">
+                        <label for="PetID">Petition ID</label>
+                        <input type="text" class="form-control" id="PetID">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="usAppID">US Application ID</label>
+                        <input type="text" list="applicationList" id="usAppID" class="form-control">
+                        <datalist id="applicationList">
+                            <!--<option value = "A">
+                            <option value = "B">-->
+                        </datalist>
+                        <!--select class="form-control" id="usAppID" title="Select US Application ID">
+                        <option data-hidden="true" value="" disabled selected>Select US Application ID</option>
+                        </select-->
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="usPetDt">US Petition Date</label>
+                        <input type="date" class="form-control" id="usPetDt">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="countryCode">Program Country</label>
+                        <select class="form-control" id="countryCode">
+                            <option value="" disabled selected>Select Country</option>
+                            <option value="JP" id="JP">JPO</option>
+                            <option value="KR" id="KR">KIPO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="foAppID">Foreign Application ID</label>
+                        <input type="text" name="myInputs[]" class="form-control" id="foAppID">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="foAppIDre">Re-Enter Foreign Application ID</label>
+                        <input type="text" class="form-control" id="foAppIDre">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4 clear-left hidden">
+                        <label for="foAppID2">Foreign Application ID 2</label>
+                        <input type="text" name="myInputs[]" class="form-control" id="foAppID2">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4 hidden">
+                        <label for="foAppIDre2">Re-Enter Foreign Application ID 2</label>
+                        <input type="text" class="form-control" id="foAppIDre2">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4 clear-left hidden">
+                        <label for="foAppID3">Foreign Application ID 3</label>
+                        <input type="text" name="myInputs[]" class="form-control" id="foAppID3">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4 hidden">
+                        <label for="foAppIDre3">Re-Enter Foreign Application ID 3</label>
+                        <input type="text" class="form-control" id="foAppIDre3">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4 clear-left" id="priority-app">
+                        <label for="prAppID">Priority Application ID</label>
+                        <input type="text" class="form-control" id="prAppID">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="prFileDt">Priority Date</label>
+                        <input type="date" class="form-control" id="prFileDt">
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="prCountryCd">Priority Country</label>
+                        <input type="date" class="form-control" id="prCountryCd" placeholder="Enter 2-letter country code">
+                    </div>
+                    
+                    <!--input type="button" value="Add Another ID" onClick="addInput('dynamicInput');" id="addbutton"><br id="buttonbreak"><br id="buttonbreak2"-->
+                    <!--
+                    <h3>Foreign Application ID </h3><br>
+                    <input type="text" name="non_us_parnt_no" width="15%"><br><br>
+                    -->
+                    
+                    <!--(Enter one ID on each line) <br>
+                    <textarea name="non_us_parnt_no" rows="3" cols="17"></textarea><br><br>
+                    -->
+                    
+                <!--/div-->
+                <!--div class="col2"-->
+                    
+                    
+                    
+                <!--/div-->
+                <!--div class="col3"-->
+                    
+                    
+                    
+                <!--/div-->
+                </form>
+                </div>
+                </div>
+                <div id="submitContent"> 
+                <button class="btn btn-primary" id="newAppSubmit"><i class="fa fa-upload"></i>Submit</button>
+                </div>
+                <div id="dynamicInput">
+                    <button type=button class="btn btn-primary" id="addbutton"><i class="fa fa-plus-square"></i>Add More</button>
+                </div>
+            
+            <!-- need to add a table down here for some extraaa data -->
+            <div id="groupDiv" class="box box4 shadow4">
+            <p><h2>Grouping Data</h2></p>
+            <table class="display" id="grouping">
+                <thead>
+                <tr>  
+                    <th>Petition Country</th>
+                    <th>US Application ID</th>
+                    <th>Foreign Application ID</th>
+                    <th>Petition Date</th>
+                    <th>Petition Office</th>
+                    <th>Entry Date</th>
+                    <th>Verified</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+            </tbody>
+            </table>
+            </div>
+            </div>
+            <!-- script for getting US application numbers that are ready for input -->
+            <script> 
+                $(document).ready(function(){
+                    $("#submit-success").hide();
+                    $("#newAppSubmit").disable(true);
+                    table = $('#grouping').DataTable({
+                    });
+                    var json_data;
+                    var isoCountries = [
+                            {value: 'AF', label: 'Afghanistan'},
+                            {value: 'AX', label: 'Aland Islands'},
+                            {value: 'AL', label: 'Albania'},
+                            {value: 'DZ', label: 'Algeria'},
+                            {value: 'AS', label: 'American Samoa'},
+                            {value: 'AD', label: 'Andorra'},
+                            {value: 'AO', label: 'Angola'},
+                            {value: 'AI', label: 'Anguilla'},
+                            {value: 'AQ', label: 'Antarctica'},
+                            {value: 'AG', label: 'Antigua And Barbuda'},
+                            {value: 'AR', label: 'Argentina'},
+                            {value: 'AM', label: 'Armenia'},
+                            {value: 'AW', label: 'Aruba'},
+                            {value: 'AU', label: 'Australia'},
+                            {value: 'AT', label: 'Austria'},
+                            {value: 'AZ', label: 'Azerbaijan'},
+                            {value: 'BS', label: 'Bahamas'},
+                            {value: 'BH', label: 'Bahrain'},
+                            {value: 'BD', label: 'Bangladesh'},
+                            {value: 'BB', label: 'Barbados'},
+                            {value: 'BY', label: 'Belarus'},
+                            {value: 'BE', label: 'Belgium'},
+                            {value: 'BZ', label: 'Belize'},
+                            {value: 'BJ', label: 'Benin'},
+                            {value: 'BM', label: 'Bermuda'},
+                            {value: 'BT', label: 'Bhutan'},
+                            {value: 'BO', label: 'Bolivia'},
+                            {value: 'BA', label: 'Bosnia And Herzegovina'},
+                            {value: 'BW', label: 'Botswana'},
+                            {value: 'BV', label: 'Bouvet Island'},
+                            {value: 'BR', label: 'Brazil'},
+                            {value: 'IO', label: 'British Indian Ocean Territory'},
+                            {value: 'BN', label: 'Brunei Darussalam'},
+                            {value: 'BG', label: 'Bulgaria'},
+                            {value: 'BF', label: 'Burkina Faso'},
+                            {value: 'BI', label: 'Burundi'},
+                            {value: 'KH', label: 'Cambodia'},
+                            {value: 'CM', label: 'Cameroon'},
+                            {value: 'CA', label: 'Canada'},
+                            {value: 'CV', label: 'Cape Verde'},
+                            {value: 'KY', label: 'Cayman Islands'},
+                            {value: 'CF', label: 'Central African Republic'},
+                            {value: 'TD', label: 'Chad'},
+                            {value: 'CL', label: 'Chile'},
+                            {value: 'CN', label: 'China'},
+                            {value: 'CX', label: 'Christmas Island'},
+                            {value: 'CC', label: 'Cocos (Keeling) Islands'},
+                            {value: 'CO', label: 'Colombia'},
+                            {value: 'KM', label: 'Comoros'},
+                            {value: 'CG', label: 'Congo'},
+                            {value: 'CD', label: 'Congo, Democratic Republic'},
+                            {value: 'CK', label: 'Cook Islands'},
+                            {value: 'CR', label: 'Costa Rica'},
+                            {value: 'CI', label: 'Cote D\'Ivoire'},
+                            {value: 'HR', label: 'Croatia'},
+                            {value: 'CU', label: 'Cuba'},
+                            {value: 'CY', label: 'Cyprus'},
+                            {value: 'CZ', label: 'Czech Republic'},
+                            {value: 'DK', label: 'Denmark'},
+                            {value: 'DJ', label: 'Djibouti'},
+                            {value: 'DM', label: 'Dominica'},
+                            {value: 'DO', label: 'Dominican Republic'},
+                            {value: 'EC', label: 'Ecuador'},
+                            {value: 'EG', label: 'Egypt'},
+                            {value: 'SV', label: 'El Salvador'},
+                            {value: 'GQ', label: 'Equatorial Guinea'},
+                            {value: 'ER', label: 'Eritrea'},
+                            {value: 'EE', label: 'Estonia'},
+                            {value: 'ET', label: 'Ethiopia'},
+                            {value: 'FK', label: 'Falkland Islands (Malvinas)'},
+                            {value: 'FO', label: 'Faroe Islands'},
+                            {value: 'FJ', label: 'Fiji'},
+                            {value: 'FI', label: 'Finland'},
+                            {value: 'FR', label: 'France'},
+                            {value: 'GF', label: 'French Guiana'},
+                            {value: 'PF', label: 'French Polynesia'},
+                            {value: 'TF', label: 'French Southern Territories'},
+                            {value: 'GA', label: 'Gabon'},
+                            {value: 'GM', label: 'Gambia'},
+                            {value: 'GE', label: 'Georgia'},
+                            {value: 'DE', label: 'Germany'},
+                            {value: 'GH', label: 'Ghana'},
+                            {value: 'GI', label: 'Gibraltar'},
+                            {value: 'GR', label: 'Greece'},
+                            {value: 'GL', label: 'Greenland'},
+                            {value: 'GD', label: 'Grenada'},
+                            {value: 'GP', label: 'Guadeloupe'},
+                            {value: 'GU', label: 'Guam'},
+                            {value: 'GT', label: 'Guatemala'},
+                            {value: 'GG', label: 'Guernsey'},
+                            {value: 'GN', label: 'Guinea'},
+                            {value: 'GW', label: 'Guinea-Bissau'},
+                            {value: 'GY', label: 'Guyana'},
+                            {value: 'HT', label: 'Haiti'},
+                            {value: 'HM', label: 'Heard Island & Mcdonald Islands'},
+                            {value: 'VA', label: 'Holy See (Vatican City State)'},
+                            {value: 'HN', label: 'Honduras'},
+                            {value: 'HK', label: 'Hong Kong'},
+                            {value: 'HU', label: 'Hungary'},
+                            {value: 'IS', label: 'Iceland'},
+                            {value: 'IN', label: 'India'},
+                            {value: 'ID', label: 'Indonesia'},
+                            {value: 'IR', label: 'Iran, Islamic Republic Of'},
+                            {value: 'IQ', label: 'Iraq'},
+                            {value: 'IE', label: 'Ireland'},
+                            {value: 'IM', label: 'Isle Of Man'},
+                            {value: 'IL', label: 'Israel'},
+                            {value: 'IT', label: 'Italy'},
+                            {value: 'JM', label: 'Jamaica'},
+                            {value: 'JP', label: 'Japan'},
+                            {value: 'JE', label: 'Jersey'},
+                            {value: 'JO', label: 'Jordan'},
+                            {value: 'KZ', label: 'Kazakhstan'},
+                            {value: 'KE', label: 'Kenya'},
+                            {value: 'KI', label: 'Kiribati'},
+                            {value: 'KR', label: 'Korea'},
+                            {value: 'KW', label: 'Kuwait'},
+                            {value: 'KG', label: 'Kyrgyzstan'},
+                            {value: 'LA', label: 'Lao People\'s Democratic Republic'},
+                            {value: 'LV', label: 'Latvia'},
+                            {value: 'LB', label: 'Lebanon'},
+                            {value: 'LS', label: 'Lesotho'},
+                            {value: 'LR', label: 'Liberia'},
+                            {value: 'LY', label: 'Libyan Arab Jamahiriya'},
+                            {value: 'LI', label: 'Liechtenstein'},
+                            {value: 'LT', label: 'Lithuania'},
+                            {value: 'LU', label: 'Luxembourg'},
+                            {value: 'MO', label: 'Macao'},
+                            {value: 'MK', label: 'Macedonia'},
+                            {value: 'MG', label: 'Madagascar'},
+                            {value: 'MW', label: 'Malawi'},
+                            {value: 'MY', label: 'Malaysia'},
+                            {value: 'MV', label: 'Maldives'},
+                            {value: 'ML', label: 'Mali'},
+                            {value: 'MT', label: 'Malta'},
+                            {value: 'MH', label: 'Marshall Islands'},
+                            {value: 'MQ', label: 'Martinique'},
+                            {value: 'MR', label: 'Mauritania'},
+                            {value: 'MU', label: 'Mauritius'},
+                            {value: 'YT', label: 'Mayotte'},
+                            {value: 'MX', label: 'Mexico'},
+                            {value: 'FM', label: 'Micronesia, Federated States Of'},
+                            {value: 'MD', label: 'Moldova'},
+                            {value: 'MC', label: 'Monaco'},
+                            {value: 'MN', label: 'Mongolia'},
+                            {value: 'ME', label: 'Montenegro'},
+                            {value: 'MS', label: 'Montserrat'},
+                            {value: 'MA', label: 'Morocco'},
+                            {value: 'MZ', label: 'Mozambique'},
+                            {value: 'MM', label: 'Myanmar'},
+                            {value: 'NA', label: 'Namibia'},
+                            {value: 'NR', label: 'Nauru'},
+                            {value: 'NP', label: 'Nepal'},
+                            {value: 'NL', label: 'Netherlands'},
+                            {value: 'AN', label: 'Netherlands Antilles'},
+                            {value: 'NC', label: 'New Caledonia'},
+                            {value: 'NZ', label: 'New Zealand'},
+                            {value: 'NI', label: 'Nicaragua'},
+                            {value: 'NE', label: 'Niger'},
+                            {value: 'NG', label: 'Nigeria'},
+                            {value: 'NU', label: 'Niue'},
+                            {value: 'NF', label: 'Norfolk Island'},
+                            {value: 'MP', label: 'Northern Mariana Islands'},
+                            {value: 'NO', label: 'Norway'},
+                            {value: 'OM', label: 'Oman'},
+                            {value: 'PK', label: 'Pakistan'},
+                            {value: 'PW', label: 'Palau'},
+                            {value: 'PS', label: 'Palestinian Territory, Occupied'},
+                            {value: 'PA', label: 'Panama'},
+                            {value: 'PG', label: 'Papua New Guinea'},
+                            {value: 'PY', label: 'Paraguay'},
+                            {value: 'PE', label: 'Peru'},
+                            {value: 'PH', label: 'Philippines'},
+                            {value: 'PN', label: 'Pitcairn'},
+                            {value: 'PL', label: 'Poland'},
+                            {value: 'PT', label: 'Portugal'},
+                            {value: 'PR', label: 'Puerto Rico'},
+                            {value: 'QA', label: 'Qatar'},
+                            {value: 'RE', label: 'Reunion'},
+                            {value: 'RO', label: 'Romania'},
+                            {value: 'RU', label: 'Russian Federation'},
+                            {value: 'RW', label: 'Rwanda'},
+                            {value: 'BL', label: 'Saint Barthelemy'},
+                            {value: 'SH', label: 'Saint Helena'},
+                            {value: 'KN', label: 'Saint Kitts And Nevis'},
+                            {value: 'LC', label: 'Saint Lucia'},
+                            {value: 'MF', label: 'Saint Martin'},
+                            {value: 'PM', label: 'Saint Pierre And Miquelon'},
+                            {value: 'VC', label: 'Saint Vincent And Grenadines'},
+                            {value: 'WS', label: 'Samoa'},
+                            {value: 'SM', label: 'San Marino'},
+                            {value: 'ST', label: 'Sao Tome And Principe'},
+                            {value: 'SA', label: 'Saudi Arabia'},
+                            {value: 'SN', label: 'Senegal'},
+                            {value: 'RS', label: 'Serbia'},
+                            {value: 'SC', label: 'Seychelles'},
+                            {value: 'SL', label: 'Sierra Leone'},
+                            {value: 'SG', label: 'Singapore'},
+                            {value: 'SK', label: 'Slovakia'},
+                            {value: 'SI', label: 'Slovenia'},
+                            {value: 'SB', label: 'Solomon Islands'},
+                            {value: 'SO', label: 'Somalia'},
+                            {value: 'ZA', label: 'South Africa'},
+                            {value: 'GS', label: 'South Georgia And Sandwich Isl.'},
+                            {value: 'ES', label: 'Spain'},
+                            {value: 'LK', label: 'Sri Lanka'},
+                            {value: 'SD', label: 'Sudan'},
+                            {value: 'SR', label: 'Suriname'},
+                            {value: 'SJ', label: 'Svalbard And Jan Mayen'},
+                            {value: 'SZ', label: 'Swaziland'},
+                            {value: 'SE', label: 'Sweden'},
+                            {value: 'CH', label: 'Switzerland'},
+                            {value: 'SY', label: 'Syrian Arab Republic'},
+                            {value: 'TW', label: 'Taiwan'},
+                            {value: 'TJ', label: 'Tajikistan'},
+                            {value: 'TZ', label: 'Tanzania'},
+                            {value: 'TH', label: 'Thailand'},
+                            {value: 'TL', label: 'Timor-Leste'},
+                            {value: 'TG', label: 'Togo'},
+                            {value: 'TK', label: 'Tokelau'},
+                            {value: 'TO', label: 'Tonga'},
+                            {value: 'TT', label: 'Trinidad And Tobago'},
+                            {value: 'TN', label: 'Tunisia'},
+                            {value: 'TR', label: 'Turkey'},
+                            {value: 'TM', label: 'Turkmenistan'},
+                            {value: 'TC', label: 'Turks And Caicos Islands'},
+                            {value: 'TV', label: 'Tuvalu'},
+                            {value: 'UG', label: 'Uganda'},
+                            {value: 'UA', label: 'Ukraine'},
+                            {value: 'AE', label: 'United Arab Emirates'},
+                            {value: 'GB', label: 'United Kingdom'},
+                            {value: 'US', label: 'United States'},
+                            {value: 'UM', label: 'United States Outlying Islands'},
+                            {value: 'UY', label: 'Uruguay'},
+                            {value: 'UZ', label: 'Uzbekistan'},
+                            {value: 'VU', label: 'Vanuatu'},
+                            {value: 'VE', label: 'Venezuela'},
+                            {value: 'VN', label: 'Viet Nam'},
+                            {value: 'VG', label: 'Virgin Islands, British'},
+                            {value: 'VI', label: 'Virgin Islands, U.S.'},
+                            {value: 'WF', label: 'Wallis And Futuna'},
+                            {value: 'EH', label: 'Western Sahara'},
+                            {value: 'YE', label: 'Yemen'},
+                            {value: 'ZM', label: 'Zambia'},
+                            {value: 'ZW', label: 'Zimbabwe'}
+                        ];
+                        
+                    //console.log(isoCountries);
+                    // call script to get application IDs to fill box!
+                    $.ajax({
+                        type: "POST",
+                        url: "get_new_applications.cgi",
+                        dataType: "JSON",
+                        //not successful
+                        error: function (jqXHR, exception) {
+                            $('#get-appl-info').hide();
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            console.log(msg);
+                        },
+                        
+                         // successful
+                        success: function(json) {
+                            json_data = json;
+                            console.log("Data" + json);
+                            var len_json = json.length;
+                            console.log("Data length: " + len_json);
+                            
+                            for (var i=0; i < len_json; i++) {
+                                option = $('<option/>');
+                                option.append(json[i].APPL_ID);
+                                $('#applicationList').append(option);
+                            }
+                            
+                        }
+                    });
+                    
+                    // if an application is selected, fill in petition date 
+                    $("#usAppID").on('input', function() {
+                        if ($(this).val().length == 8) {
+                        $("usPetDt").val("");
+                        $("PetID").val("");
+                        var appl_id = $("#usAppID").val();
+                        var us_petition_dt; 
+                        var petition_id; 
+                        for (var i = 0; i < json_data.length; i++) {
+                            //console.log("current value:" + i + ":" + json_data[i].APPL_ID);
+                            if (json_data[i].APPL_ID == appl_id) {
+                                //alert("Jason!");
+                                us_petition_dt = json_data[i].PETITION_DT;
+                                petition_id = json_data[i].PETITION_ID;
+                            }
+                        }                        
+                        console.log("Application: " + appl_id + ", Date: " + us_petition_dt);
+                        $("#usPetDt").val(us_petition_dt);
+                        $("#PetID").val(petition_id);
+                        
+                        $.ajax({
+                    
+                        type: "POST",
+                        url: "get_grouping.cgi",
+                        //data: "appl_id=" + appl_id + "type=" + type,
+                        data: {appl_id: appl_id},
+                        dataType: "JSON",
+                        
+                        //not successful
+                        error: function (jqXHR, exception) {
+                            $('#get-appl-info').hide();
+                            //alert("Hey!");
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            console.log(msg);
+                        },
+                        
+                        // successful
+                        success: function(json) {
+                            //json_data = json;
+                            console.log("Data" + json);
+                            //json_data = jQuery.parseJSON(json);
+                            //console.log("Data" + json);
+                            var len_json = json.length;
+                            console.log(len_json);
+                            
+                            // before updating data, remove old data 
+                            table.destroy();
+                            $("#grouping tbody tr").remove();
+                            
+                            for (var i = 0; i < json.length; i++) {
+                            
+                                var seq_no;
+                                
+                                tr = $('<tr/>');
+                                tr.append("<td>" + json[i].COUNTRY_CD + "</td>");
+                                tr.append("<td>" + json[i].APPL_ID + "</td>");
+                                tr.append("<td>" + json[i].FO_APPL_ID + "</td>");
+                                tr.append("<td>" + json[i].PETITION_DT + "</td>");
+                                tr.append("<td>" + json[i].OFFICE_CD + "</td>");
+                                tr.append("<td>" + json[i].ENTRY_TS + "</td>");
+                                
+                                if (json[i].VERIFY_FLAG =='1') {
+                                    tr.append("<td class='d_trans'><span class='glyphicon glyphicon-ok' id='deleted'></span></td>");
+                                } else {
+                                    tr.append("<td></td>");
+                                }   
+                                
+                                $('#grouping').append(tr);
+                            }
+                            table = $('#grouping').DataTable({
+                                "order": [[ 1, "asc" ]],
+                                //columnDefs: [
+                                //    { width: 500, targets: 0 }
+                                //],
+                                fixedColumns: true
+                            });
+                        
+                        }
+                    
+                    
+                    });
+                    } else {//if ($(this).val().length != 8 {
+                        $("#usPetDt").val("");
+                        $("#PetID").val("");
+                    }
+                    });
+                    
+                    // if they type in ID once, it auto-copies to priority
+                    //$('#foAppID').bind('keypress keyup blur', function() {
+                    //    $('#prAppID').val($(this).val());
+                    //});
+                    //$('#foFileDt1').bind('keypress keyup blur', function() {
+                    //    $('#prFileDt').val($(this).val());
+                    //});
+                    
+                    // if foreign file date selected, change priority also
+                    //$('#foFileDt1').change(function() {
+                    //    $('#prFileDt').val($(this).val());
+                    //});
+                    
+                    $("#addbutton").on('click', function() {
+                        var name = $(this).parent('div').attr('id');
+                        console.log(name);
+                        addInput('foAppID');
+                    });
+                    
+                    $("#prCountryCd").autocomplete({
+                        source: isoCountries
+                    });
+                    
+                    
+                    // make sure foreign application is typed correctly
+                    $('#foAppID, #foAppIDre').bind('keypress keyup input blur', function() {
+                        //console.log($(this).val());
+                        if ($("#foAppIDre").val() != $('#foAppID').val()) {
+                            $("#foAppIDre").parent('div').removeClass("has-success has-feedback");
+                            $("#foAppIDre").parent('div').addClass("has-error has-feedback");
+                            $('#foAppID').parent('div').removeClass("has-success has-feedback");
+                            $('#foAppID').parent('div').addClass("has-error has-feedback");
+                        } else {
+                            $("#foAppIDre").parent('div').removeClass("has-error has-feedback");
+                            $("#foAppIDre").parent('div').addClass("has-success has-feedback");
+                            $('#foAppID').parent('div').removeClass("has-error has-feedback");
+                            $('#foAppID').parent('div').addClass("has-success has-feedback");
+                        }
+                        
+                    });
+                    
+                    //$('#foAppID').bind('keypress keyup input blur', function() {
+                    //    //console.log($(this).val());
+                    //    if ($(this).val() != $('#foAppIDre').val()) {
+                    //        $(this).parent('div').removeClass();
+                    //        $(this).parent('div').addClass("form-group col-xs-4 col-md-4 has-error has-feedback");
+                    //        $('#foAppIDre').parent('div').removeClass();
+                    //        $('#foAppIDre').parent('div').addClass("form-group col-xs-4 col-md-4 has-error has-feedback");
+                    //    } else {
+                    //        $(this).parent('div').removeClass();
+                    //        $(this).parent('div').addClass("form-group col-xs-4 col-md-4 has-success has-feedback");
+                    //        $('#foAppIDre').parent('div').removeClass();
+                    //        $('#foAppIDre').parent('div').addClass("form-group col-xs-4 col-md-4 has-success has-feedback");
+                    //    }
+                    //    
+                    //});
+                    
+                    // make sure foreign application is typed correctly
+                    $('#foAppID2, #foAppIDre2').bind('keypress keyup input blur', function() {
+                        //console.log($(this).val());
+                        if ($("#foAppIDre2").val() != $('#foAppID2').val()) {
+                            $("#foAppIDre2").parent('div').removeClass("has-success has-feedback");
+                            $("#foAppIDre2").parent('div').addClass("has-error has-feedback");
+                            $('#foAppID2').parent('div').removeClass("has-success has-feedback");
+                            $('#foAppID2').parent('div').addClass("has-error has-feedback");
+                        } else {
+                            $("#foAppIDre2").parent('div').removeClass("has-error has-feedback");
+                            $("#foAppIDre2").parent('div').addClass("has-success has-feedback");
+                            $('#foAppID2').parent('div').removeClass("has-error has-feedback");
+                            $('#foAppID2').parent('div').addClass("has-success has-feedback");
+                        }
+                        
+                    });
+                    
+                    // make sure foreign application is typed correctly
+                    $('#foAppID3, #foAppIDre3').bind('keypress keyup input blur', function() {
+                        //console.log($(this).val());
+                        if ($("#foAppIDre3").val() != $('#foAppID3').val()) {
+                            $("#foAppIDre3").parent('div').removeClass("has-success has-feedback");
+                            $("#foAppIDre3").parent('div').addClass("has-error has-feedback");
+                            $('#foAppID3').parent('div').removeClass("has-success has-feedback");
+                            $('#foAppID3').parent('div').addClass("has-error has-feedback");
+                        } else {
+                            $("#foAppIDre3").parent('div').removeClass("has-error has-feedback");
+                            $("#foAppIDre3").parent('div').addClass("has-success has-feedback");
+                            $('#foAppID3').parent('div').removeClass("has-error has-feedback");
+                            $('#foAppID3').parent('div').addClass("has-success has-feedback");
+                        }
+                        
+                    });
+                    
+                    // can't submit until all elements are filled in and fo apps are equal
+                    $("#usAppID, #countryCode, #foAppID, #foAppIDre, #prAppID, #prFileDt, #prCountryCd, #foAppID2, #foAppIDre2, #foAppID3, #foAppIDre3").bind('keypress keyup change input blur', function(){
+                        //console.log("Check to see if should enable submit");
+                        var appl_id = $("#usAppID").val();
+                        var country_cd = $("#countryCode").val();
+                        var fo_appl_id = $("#foAppID").val();
+                        var fo_appl_id_re = $("#foAppIDre").val();
+                        var fo_appl_id2 = $("#foAppID2").val();
+                        var fo_appl_id2_re = $("#foAppIDre2").val();
+                        var fo_appl_id3 = $("#foAppID3").val();
+                        var fo_appl_id3_re = $("#foAppIDre3").val();
+                        var pr_appl_id = $("#prAppID").val();
+                        var pr_dt = $("#prFileDt").val();
+                        var pr_country_cd = $("#prCountryCd").val();
+                        
+                        if (appl_id && country_cd && fo_appl_id && pr_appl_id && pr_dt && pr_country_cd &&fo_appl_id == fo_appl_id_re && fo_appl_id2 == fo_appl_id2_re && fo_appl_id3 == fo_appl_id3_re) {
+                            //console.log("Submit button enabled");
+                            $("#newAppSubmit").disable(false);
+                        } else {
+                            //console.log("Submit button disabled");
+                            $("#newAppSubmit").disable(true);
+                        }
+                        
+                    });
+                    
+                    
+                    // if submit button is clicked, everything must be filled out,
+                    // then submit stuff to server!
+                    
+                    $("#newAppSubmit").click(function() {
+                        console.log("Submit Clicked!");
+                        var appl_id = $("#usAppID").val();
+                        var us_petition_dt = $("#usPetDt").val();
+                        var country_cd = $("#countryCode").val();
+                        var fo_appl_id = $("#foAppID").val();
+                        var fo_file_dt = $("#foFileDt1").val();
+                        var pr_appl_id = $("#prAppID").val();
+                        var pr_dt = $("#prFileDt").val();
+                        var pr_country_cd = $("#prCountryCd").val();
+                        var petition_id = $("#PetID").val();
+                        
+                        console.log(appl_id, us_petition_dt, country_cd, fo_appl_id, fo_file_dt, pr_appl_id, pr_dt, pr_country_cd, petition_id)
+                        
+                        if (appl_id && country_cd && fo_appl_id) {
+                            console.log("Ready to submit!");
+                            
+                            
+                            var fo_appl_id_array = [];
+                            for (var i=0; i < 3; i++) {
+                                if (i == 0) {
+                                fo_appl_id_array[i] = $("#foAppID").val();
+                                } else {
+                                    fo_appl_id_array[i] = $("#foAppID" + (i+1)).val();
+                                }
+                            
+                            }
+                            fo_appl_id_array = $.grep(fo_appl_id_array,function(n){ return n === undefined || n });
+                            console.log(fo_appl_id_array);
+                            // ready for ajax!
+                            $.ajax({
+                                type: "POST",
+                                url: "manual petition entry.cgi",
+                                data: {appl_id: appl_id, 
+                                       us_petition_dt: us_petition_dt,
+                                       country_cd: country_cd,
+                                       fo_appl_id: fo_appl_id_array,
+                                       fo_file_dt: fo_file_dt,
+                                       pr_appl_id: pr_appl_id,
+                                       pr_dt: pr_dt,
+                                       pr_country_cd: pr_country_cd,
+                                       petition_id: petition_id},
+                                //dataType: "JSON",
+                                //not successful
+                                error: function (jqXHR, exception) {
+                                    $('#get-appl-info').hide();
+                                    var msg = '';
+                                    if (jqXHR.status === 0) {
+                                        msg = 'Not connect.\n Verify Network.';
+                                    } else if (jqXHR.status == 404) {
+                                        msg = 'Requested page not found. [404]';
+                                    } else if (jqXHR.status == 500) {
+                                        msg = 'Internal Server Error [500].';
+                                    } else if (exception === 'parsererror') {
+                                        msg = 'Requested JSON parse failed.';
+                                    } else if (exception === 'timeout') {
+                                        msg = 'Time out error.';
+                                    } else if (exception === 'abort') {
+                                        msg = 'Ajax request aborted.';
+                                    } else {
+                                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                                    }
+                                    console.log(msg);
+                                },
+                                
+                                 // successful
+                                success: function(perl_data) {
+                                    console.log(perl_data);
+                                    //$("#submit-success").show();
+                                    //$("#usAppID option:selected").remove();
+                                    //$("#manual-entry-form")[0].reset();
+                                    // also, clear everything!
+                                    $("#PetID").val("");
+                                    $("#usAppID").val("");
+                                    $("#countryCode").val("");
+                                    $("#usPetDt").val("");
+                                    $("#foAppID").val("");
+                                    $("#foAppIDre").val("");
+                                    $("#foAppID2").val("");
+                                    $("#foAppIDre2").val("");
+                                    $("#foAppID3").val("");
+                                    $("#foAppIDre3").val("");
+                                    
+                                    $("#prAppID").val("");
+                                    $("#prFileDt").val("");
+                                    $("#prCountryCd").val("");
+                                }
+                            });
+                            
+                        } else {
+                            alert("Please fill out entire form.");
+                        }
+                        
+                        
+                    });
+                    
+                });
+            </script>
+            
+          </div>
+        </section>
+      </div>
+    </section>    
+</section>
+
+
+
+</body>
+</html>
